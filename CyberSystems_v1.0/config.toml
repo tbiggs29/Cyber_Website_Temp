@@ -38,7 +38,7 @@ paginate = 5
     # lastModDisplay = ""
 
     [languages.en.params.logo]
-      logoText = "Colorado State Systems Engineering"
+      logoText = "CSU systems cyber"
       logoHomeLink = "/home"
     # or
     #
@@ -54,4 +54,3 @@ paginate = 5
         identifier = "J1939 Attack"
         name = "J1939 Attack"
         url = "/J1939 Attack"
-        
