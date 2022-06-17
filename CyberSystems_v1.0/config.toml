@@ -1,6 +1,7 @@
-baseURL = 'http://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseurl = "http://example.org/"
+languageCode = "en-us"
+theme = "hugo-theme"
+paginate = 5
 
 
 [params]
@@ -32,14 +33,7 @@ title = 'My New Hugo Site'
     keywords = ""
     copyright = ""
     menuMore = "Show more"
-    writtenBy = "Written by"
-    readMore = "Read more"
-    readOtherPosts = "Read other posts"
-    newerPosts = "Newer posts"
-    olderPosts = "Older posts"
-    minuteReadingTime = "min read"
-    dateFormatSingle = "2006-01-02"
-    dateFormatList = "2006-01-02"
+
     # leave empty to disable, enter display text to enable
     # lastModDisplay = ""
 
