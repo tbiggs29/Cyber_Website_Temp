@@ -39,7 +39,7 @@ paginate = 5
 
     [languages.en.params.logo]
       logoText = "Colorado State Systems Engineering"
-      logoHomeLink = "/home"
+      logoHomeLink = "/"
     # or
     #
     # path = "/img/your-example-logo.svg"
@@ -54,3 +54,7 @@ paginate = 5
         identifier = "J1939 Attack"
         name = "J1939 Attack"
         url = "/J1939 Attack"
+        [[languages.en.menu.main]]
+        identifier = "home"
+        name = "home"
+        url = "/home/"
