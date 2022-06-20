@@ -2,38 +2,40 @@ from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 import json
 
+#http://127.0.0.1:5000/
+
 app = Flask(__name__)
 api = Api(app)
 
 
 class PGN(Resource):
     def get(self, PGN):
-        with open("J1939.json", "r") as jsonFile:
+        with open("API_Connection\J1939.json", "r") as jsonFile:
             data = json.load(jsonFile) 
         return {"PGN": {PGN: data["PGN"][PGN]}}
 
 class SPN(Resource):
     def get(self, SPN):
-        with open("J1939.json", "r") as jsonFile:
+        with open("API_Connection\J1939.json", "r") as jsonFile:
             data = json.load(jsonFile) 
         return {"SPN": {SPN : data["SPN"][SPN]}}
 
 class SA(Resource):
     def get(self, SA):
-        with open("J1939.json", "r") as jsonFile:
+        with open("API_Connection\J1939.json", "r") as jsonFile:
             data = json.load(jsonFile) 
         return {"SA": {SA: data["SA"][SA]}}
     
 
 class FMI(Resource):
     def get(self, SPN):
-        with open("J1939.json", "r") as jsonFile:
+        with open("API_Connection\J1939.json", "r") as jsonFile:
             data = json.load(jsonFile) 
         return data["PGN"][PGN]
 
 class SLOT(Resource):
     def get(self, SPN):
-        with open("J1939.json", "r") as jsonFile:
+        with open("API_Connection\J1939.json", "r") as jsonFile:
             data = json.load(jsonFile) 
         return data["PGN"][PGN]
 
