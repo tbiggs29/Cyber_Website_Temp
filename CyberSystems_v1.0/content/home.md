@@ -1,9 +1,3 @@
-+++
-title = "Colorado State University systems cyber"
+# Colorado State University Systems Cyber
 
-+++
-
-
-style="width:150px; height:100px
-
-![csu logo](https://149689330.v2.pressablecdn.com/wp-content/uploads/2016/11/CSU-Logo.png){style=width:150px; height:100px} {align=center}
+![](https://brand.colostate.edu/wp-content/uploads/sites/47/2019/02/CSU-Official-wrdmrk-357-617.png)
