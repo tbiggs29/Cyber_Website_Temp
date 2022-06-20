@@ -38,7 +38,7 @@ paginate = 5
     # lastModDisplay = ""
 
     [languages.en.params.logo]
-      logoText = "CSU systems cyber"
+      logoText = "CSU Systems Cyber"
       logoHomeLink = "/home"
     # or
     #
