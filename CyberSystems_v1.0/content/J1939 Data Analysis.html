@@ -3,14 +3,21 @@ title = "J1939 Data Analysis"
 description = "Takes data and outputs data of J1939 CAN Data"
 +++
 
+
 <!DOCTYPE html>
 <html>
-   <body>
-      <form action = "http://127.0.0.1:5000/uploader" method = "POST" 
-         enctype = "multipart/form-data">
-         <input type = "file" name = "file" />
-         <input type = "submit"/>
-      </form>   
-   </body>
+  <body>
+    <div class="container">
+        <h1>Multipart File Upload</h1>
+        <form id="form" enctype="multipart/form-data">
+            <div class="input-group">
+                <label for="files">Select files</label>
+                <input id="file" type="file" multiple />
+            </div>
+            <button class="submit-btn" type="submit">Upload</button>
+        </form>
+    </div>
+    <script src="singlefileupload.js"></script>
+</body>
 </html>
 
