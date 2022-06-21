@@ -1,7 +1,9 @@
 # importing the required libraries
 import os
+import numpy
 from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
+from rpmdecoder import decoder
 
 # initialising the flask app
 app = Flask(__name__)
@@ -18,7 +20,7 @@ if not os.path.exists(upload_folder):
 app.config['UPLOAD_FOLDER'] = upload_folder
 
 # configuring the allowed extensions
-allowed_extensions = ['txt']
+allowed_extensions = ['txt', 'log']
 
 def check_file_extension(filename):
     return filename.split('.')[-1] in allowed_extensions
@@ -35,9 +37,26 @@ def uploadfile():
       # Saving the file in the required destination
       if check_file_extension(f.filename):
          f.save(os.path.join(app.config['UPLOAD_FOLDER'] ,secure_filename(f.filename))) # this will secure the file
-         return 'file uploaded successfully' # Display thsi message after uploading
+         #return 'file uploaded successfully' # Display thsi message after uploading
+         return decoder("C:/Users/austi/Hugo/Cyber_Website_Temp/ProjectFile/CyberSystems_temp/CyberSystems_v1.0/uploads/" + f.filename)
       else:
          return 'The file extension is not allowed'
 
+
+###decoder###
+
+@app.route('/PGN/<PGN>', methods = ['GET'])
+def retrievePGN(PGN):
+   return {"PGN": {PGN: data["PGN"][PGN]}}
+@app.route('/SPN/<SPN>', methods = ['GET'])
+def retrieveSPN(SPN):
+    return {"SPN": {SPN : data["SPN"][SPN]}}
+@app.route('/SA/<SA>', methods = ['GET'])
+def retrieveSA(SA):
+    return {"SA": {SA: data["SA"][SA]}}
+
+
+
+######
 if __name__ == '__main__':
    app.run() # running the flask app
