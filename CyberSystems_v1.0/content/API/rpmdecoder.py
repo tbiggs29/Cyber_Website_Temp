@@ -5,8 +5,10 @@ def decoder(file):
         data = file.read()
     organizedData = re.split("\n |\n", data)
     organizedData = organizedData[1:len(organizedData)-1]
-    returnData = {"Time": [],
-                   "rpm": []}
+    returnData = {"rpmTime": [],
+                   "rpm": [],
+                   "speedTime": [],
+                   "speed": []}
     time = []
     dataID = []
     byteData = []
@@ -22,7 +24,21 @@ def decoder(file):
         pgn = str(int(pgn, 16))
         if(pgn == "61444"):
             bytes = byteData[i].split(" ")
-            rpmSpeed = str(int(bytes[4] + bytes[3], 16)*0.125)
-            returnData["Time"].append(time[i])
-            returnData["rpm"].append(rpmSpeed)
+            rpm = int(bytes[4] + bytes[3], 16)*0.125
+            if(rpm < 8031.875):
+                returnData["rpmTime"].append(float(time[i]))
+                returnData["rpm"].append(rpm)
+        elif(pgn == "65265"):
+            bytes = byteData[i].split(" ")
+            speed = int(bytes[2] + bytes[1], 16)*0.00390625
+            if(speed < 250.99609375):
+                returnData["speedTime"].append(float(time[i]))
+                returnData["speed"].append(speed)
     return json.dumps(returnData, indent=3)
+
+
+
+
+
+
+

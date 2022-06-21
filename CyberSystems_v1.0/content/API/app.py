@@ -1,9 +1,12 @@
 # importing the required libraries
 import os
-import numpy
-from flask import Flask, render_template, request
+import json
+import io
+from flask import Flask, render_template, request, Response
 from werkzeug.utils import secure_filename
-from rpmdecoder import decoder
+from rpmDecoder import decoder
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
 
 # initialising the flask app
 app = Flask(__name__)
@@ -30,7 +33,8 @@ def check_file_extension(filename):
 def upload_file():
    return render_template('upload.html')
 
-@app.route('/upload', methods = ['GET', 'POST'])
+
+@app.route('/upload', methods = ['POST'])
 def uploadfile():
    if request.method == 'POST': # check if the method is post
       f = request.files['file'] # get the file from the files object
@@ -38,25 +42,26 @@ def uploadfile():
       if check_file_extension(f.filename):
          f.save(os.path.join(app.config['UPLOAD_FOLDER'] ,secure_filename(f.filename))) # this will secure the file
          #return 'file uploaded successfully' # Display thsi message after uploading
-         return decoder("C:/Users/austi/Hugo/Cyber_Website_Temp/ProjectFile/CyberSystems_temp/CyberSystems_v1.0/uploads/" + f.filename)
+         data = json.loads(decoder("C:/Users/austi/Hugo/Cyber_Website_Temp/ProjectFile/CyberSystems_temp/CyberSystems_v1.0/uploads/" + f.filename))
+         fig = Figure()
+         axis = fig.add_subplot(1, 1, 1)
+         xs = data["rpmTime"]
+         ys = data["rpm"]
+         axis.plot(xs, ys)
+         output = io.BytesIO()
+         FigureCanvas(fig).print_png(output)
+         return Response(output.getvalue(), mimetype='image/png')
       else:
          return 'The file extension is not allowed'
 
 
-###decoder###
 
-@app.route('/PGN/<PGN>', methods = ['GET'])
-def retrievePGN(PGN):
-   return {"PGN": {PGN: data["PGN"][PGN]}}
-@app.route('/SPN/<SPN>', methods = ['GET'])
-def retrieveSPN(SPN):
-    return {"SPN": {SPN : data["SPN"][SPN]}}
-@app.route('/SA/<SA>', methods = ['GET'])
-def retrieveSA(SA):
-    return {"SA": {SA: data["SA"][SA]}}
+
+
 
 
 
 ######
 if __name__ == '__main__':
    app.run() # running the flask app
+

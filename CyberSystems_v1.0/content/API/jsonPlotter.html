@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>JavaScript - read JSON from URL</title>
+    <script src="http://localhost:5000/upload"></script>
+</head>
+
+<body>
+    <div class="mypanel"></div>
+
+    <script>
+    $.getJSON('http://time.jsontest.com', function(data) {
+
+        var text = `Date: ${data.rpm}<br>
+                    Time: ${data.time}<br>`
+
+        $(".mypanel").html(text);
+    });
+    </script>
+
+</body>
+</html>
