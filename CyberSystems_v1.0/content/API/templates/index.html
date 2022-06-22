@@ -1,6 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    <p><b>File is uploaded</b></p>
-</body>
-</html>
+{% extends "upload.html" %}
+{% block content %}
+<div>
+    <p>{{ data }}</p>
+
+    <p>{{ rpmTime }}</p>
+    <p>My rpmTime:</p>
+    <ul>
+        {% for rpmTime in rpmTime %}
+        <li>{{ data }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

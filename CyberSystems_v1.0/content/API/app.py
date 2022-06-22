@@ -1,8 +1,9 @@
 # importing the required libraries
+from contextlib import redirect_stderr
 import os
 import json
 import io
-from flask import Flask, render_template, request, Response
+from flask import Flask, render_template, request, Response, redirect, url_for
 from werkzeug.utils import secure_filename
 from rpmDecoder import decoder
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -33,35 +34,22 @@ def check_file_extension(filename):
 def upload_file():
    return render_template('upload.html')
 
-
 @app.route('/upload', methods = ['POST'])
 def uploadfile():
    if request.method == 'POST': # check if the method is post
       f = request.files['file'] # get the file from the files object
       # Saving the file in the required destination
       if check_file_extension(f.filename):
-         f.save(os.path.join(app.config['UPLOAD_FOLDER'] ,secure_filename(f.filename))) # this will secure the file
+         fileName = secure_filename(f.filename)
+         f.save(os.path.join(app.config['UPLOAD_FOLDER'] , fileName)) # this will secure the file
          #return 'file uploaded successfully' # Display thsi message after uploading
          data = json.loads(decoder("C:/Users/austi/Hugo/Cyber_Website_Temp/ProjectFile/CyberSystems_temp/CyberSystems_v1.0/uploads/" + f.filename))
-         fig = Figure()
-         axis = fig.add_subplot(1, 1, 1)
-         xs = data["rpmTime"]
-         ys = data["rpm"]
-         axis.plot(xs, ys)
-         output = io.BytesIO()
-         FigureCanvas(fig).print_png(output)
-         return Response(output.getvalue(), mimetype='image/png')
+         return render_template("index.html", data = data["rpmTime"])
       else:
-         return 'The file extension is not allowed'
-
-
-
-
-
+         return "not working"
 
 
 
 ######
 if __name__ == '__main__':
    app.run() # running the flask app
-

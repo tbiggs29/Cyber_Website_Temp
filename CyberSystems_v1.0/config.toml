@@ -18,6 +18,8 @@ paginate = 5
   # Show reading time in minutes for posts
   showReadingTime = false
 
+  relativeURLs = true
+
   # Show table of contents at the top of your posts (defaults to false)
   # Alternatively, add this param to post front matter for specific posts
   # toc = true
@@ -54,3 +56,4 @@ paginate = 5
         identifier = "J1939 Attack"
         name = "J1939 Attack"
         url = "/J1939 Attack"
+
